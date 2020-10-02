@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Alert, Button, Linking, StyleSheet ,ImageBackground ,View, Text } from "react-native";
 
 const supportedURL = "https://github.com/Leinady/3SA03-React-native";
+const supported01URL = "https://www.youtube.com/watch?v=dRaT2Je0NOE";
 
 const OpenURLButton = ({ url, children }) => {
     const handlePress = useCallback(async () => {
@@ -24,6 +25,7 @@ const App = () => {
         <ImageBackground source = {require('../assets/ER.jpg')} style = {style.pic}> 
         <Text style = {style.btext}> Thirapat Pathan </Text>
             <OpenURLButton url={supportedURL}>Open Git URL</OpenURLButton>
+            <OpenURLButton url={supported01URL}>Open youtube URL</OpenURLButton>
         </ImageBackground>
       </View>
     );
