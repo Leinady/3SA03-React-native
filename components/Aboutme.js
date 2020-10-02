@@ -1,19 +1,38 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet,ImageBackground } from 'react-native';
+import React, { useCallback } from "react";
+import { Alert, Button, Linking, StyleSheet ,ImageBackground ,View, Text } from "react-native";
 
-export default function Aboutme(){
-     return(
-        <View style = {style.atext}>
-                <ImageBackground source = {require('../assets/ER.jpg')} style = {style.pic}> 
-            <Text style = {style.btext}> Thirapat Pathan </Text>
-                </ImageBackground>
-        </View>
+const supportedURL = "https://github.com/Leinady/3SA03-React-native";
+
+const OpenURLButton = ({ url, children }) => {
+    const handlePress = useCallback(async () => {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+       
+        await Linking.openURL(url);
+      } else {
+        Alert.alert(`Don't know how to open this URL: ${url}`);
+      }
+    }, [url]);
+  
+    return <Button title={children} onPress={handlePress} />;
+  };
+
+
+const App = () => {
+    return (
+      <View style={style.container}>
+        <ImageBackground source = {require('../assets/ER.jpg')} style = {style.pic}> 
+        <Text style = {style.btext}> Thirapat Pathan </Text>
+            <OpenURLButton url={supportedURL}>Open Git URL</OpenURLButton>
+        </ImageBackground>
+      </View>
     );
-}
+  };
 
+export default App;
+   
 const style = StyleSheet.create ({
     atext :{
-       
         alignItems : 'center',
     },
     btext :{
@@ -26,4 +45,7 @@ const style = StyleSheet.create ({
         width : '100%',
         height : '100%',
     },
+    container: {  
+        justifyContent: "center", 
+        alignItems: "center" },
 });
